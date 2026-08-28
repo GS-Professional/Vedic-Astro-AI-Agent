@@ -1,0 +1,11 @@
+# Runtime dependencies (mirrors pyproject.toml [project.dependencies]).
+# PyJHora is pinned exactly: the computation layer is written against the 4.8.7 API.
+PyJHora==4.8.7
+pyswisseph>=2.10.3.2
+numpy>=1.26.0
+pytz>=2024.1
+timezonefinder>=6.5.0
+geopy>=2.4.1
+geocoder>=1.38.1
+requests>=2.31.0
+python-dateutil>=2.8.2

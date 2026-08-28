@@ -1,0 +1,65 @@
+[project]
+name = "vedic-astro-agent"
+version = "0.1.0"
+description = "Agentic AI Vedic astrologer: plans readings and grounds every claim in PyJHora-verified computations"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "AGPL-3.0-only" }
+authors = [{ name = "GS-Professional" }]
+keywords = ["vedic-astrology", "jyotish", "agent", "pyjhora", "mcp", "llm"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Astronomy",
+]
+dependencies = [
+    # Pinned exactly: PyJHora's return shapes change between minor versions, and this
+    # computation layer is written and tested against 4.8.7 specifically.
+    "PyJHora==4.8.7",
+    # pyswisseph ships no wheels, so installing it needs a C toolchain (build-essential + swig)
+    # unless you use the Docker image of the pyjhora-mcp server instead.
+    "pyswisseph>=2.10.3.2",
+    "numpy>=1.26.0",
+    "pytz>=2024.1",
+    "timezonefinder>=6.5.0",
+    "geopy>=2.4.1",
+    "geocoder>=1.38.1",
+    "requests>=2.31.0",
+    "python-dateutil>=2.8.2",
+]
+
+[project.optional-dependencies]
+# Talking to a running pyjhora-mcp server via the in-process fastmcp client instead of the
+# bundled minimal MCP client (the bundled client needs nothing extra).
+mcp = ["fastmcp>=2.0.0", "pydantic>=2.0.0"]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.4.0",
+]
+
+[project.scripts]
+veda = "vedic_astro_agent.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/GS-Professional/Vedic-Astro-AI-Agent"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vedic_astro_agent"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP"]
