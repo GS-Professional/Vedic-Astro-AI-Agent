@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Ephemeris data (~105MB) — fetched by setup_ephe.sh, never committed
+ephe/
+*.se1
+
+# Secrets and local config
+.env
+
+# Agent session output
+output/
+sessions/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
