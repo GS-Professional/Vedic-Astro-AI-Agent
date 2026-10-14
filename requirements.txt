@@ -1,11 +1,26 @@
-# Runtime dependencies (mirrors pyproject.toml [project.dependencies]).
-# PyJHora is pinned exactly: the computation layer is written against the 4.8.7 API.
-PyJHora==4.8.7
-pyswisseph>=2.10.3.2
-numpy>=1.26.0
-pytz>=2024.1
-timezonefinder>=6.5.0
-geopy>=2.4.1
-geocoder>=1.38.1
-requests>=2.31.0
+# PyJHora Vedic astrology computation engine (Step 1) — dependencies
+#
+# IMPORTANT — dev-release target (since Sept 2026):
+#   PyJHora has NOT published to PyPI since V4.8.7. The development line
+#   (currently version "5.0" on GitHub master) is installable ONLY from source.
+#   Automated installer (proven recipe):
+#
+#       bash install_pyjhora_dev.sh
+#
+#   ...or the manual steps documented in REBUILD.md §"Install the dev release".
+#
+# Install these Python dependencies with pip:
+#   pip install -r requirements.txt
+#
+pyswisseph==2.10.3.2
+numpy>=1.24
+geocoder==1.38.1
+geopy==2.4.1
+timezonefinder>=6.5
+reverse_geocode==1.6.6
+pytz==2024.1
+requests==2.32.3
+setuptools>=69
+
+# PyJHora runtime dependency (imported by jhora.utils)
 python-dateutil>=2.8.2

@@ -16,22 +16,19 @@ jobs:
           python-version: "3.11"
           cache: pip
 
-      # pyswisseph ships source-only wheels; PyJHora's drik uses timezonefinder etc.
       - name: Install system build tools
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends build-essential swig
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends build-essential swig git
 
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -e ".[dev]"
+          pip install -r requirements.txt
+
+      - name: Install PyJHora dev release
+        run: bash install_pyjhora_dev.sh
 
       - name: Download Swiss Ephemeris
-        run: |
-          ./setup_ephe.sh ./ephe
-          echo "VEDIC_EPHE_DIR=$PWD/ephe" >> "$GITHUB_ENV"
-
-      - name: Lint
-        run: ruff check src tests
+        run: python setup_ephemeris.py
 
       - name: Test
-        run: pytest -q
+        run: python test_coverage.py
